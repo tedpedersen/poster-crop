@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Poster Crop</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="https://robocrop-v2.firebaseapp.com/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="robocrop/css/robocrop.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+#demo-profile{
+    width: 476px;
+    height: 476px;
+    background: url("img/peacenyc_frame.png");
+    margin: 0 auto;
+}
+h1,
+.centered{
+  margin: 0 auto;
+  text-align: center;
+}
+#textHeader{
+  color: #2612B2;
+}
+#crop-editor h1{
+  color: #fff;
+}
+</style>
+<body>
+<h1 id="textHeader" class="centered"></h1>
+<p id="textSubHeader" class="centered"></p>
+<div id="demo-profile">
+  <div class="crop-element" data-name="profile_picture" data-crop=">=476,>=476" data-crop-required="true" data-crop-open="true" data-watermark="main" >
+    <img src="img/peacenyc_frame.png"/>
+    <input type="file"/>
+  </div>
+</div>
+<script src="robocrop/robocrop.min.js"></script>
+</body>
+<script>
+robocrop.events.upload.before = function(picture){
+    return [
+		{name:'original_image', value: "'"+robocrop.originalImage+"'"},
+    ];
+};
+robocrop.events.upload.progress = function(picture,loaded,total){
+    var value = Math.ceil(loaded/total) * 100;
+    console.log('progress', value+'%');
+};
+</script>
+<script type="text/javascript">
+robocrop.watermarks = {
+    main: {
+        file: 'img/peacenyc_frame.png',
+        opacity: 10,
+        position: "bottom-right",
+        margin_top: 0,
+        margin_right: 0,
+        margin_bottom: 0,
+        margin_left: 0
+    }
+};
+</script>
+<script>
+$( "#textHeader" ).append("1. Click To Upload Your Image");
+$( "#textSubHeader" ).append("*Your image needs to be a minimum of 476px X 476px");
+$( "#crop-editor" ).append( "<h1>2. Crop Your Image</h1>" );
+$(".apply").click(function () {
+  $( "#textHeader" ).text("3. Enter Your Details");
+  $( "#textSubHeader" ).text("Please enter your name and location");
+})
+</script>
+</html>
