@@ -50,6 +50,10 @@ robocrop.events.upload.progress = function(picture,loaded,total){
     var value = Math.ceil(loaded/total) * 100;
     console.log('progress', value+'%');
 };
+robocrop.events.upload.end = function(response){
+    console.log('upload complete');
+    console.log(response);
+};
 </script>
 <script type="text/javascript">
 robocrop.watermarks = {
