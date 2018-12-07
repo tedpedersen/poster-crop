@@ -23,6 +23,16 @@
   margin: auto;
 }
 
+#resultFrame{
+  position: absolute;
+  top: 34px;
+  left: 21px;
+}
+
+.vanilla-save{
+  visibility: hidden;
+}
+
 
 </style>
 
@@ -30,7 +40,7 @@
 <div id="vanilla-demo"></div>
 
 <div class="actions center">
-  <button class="vanilla-result">Result</button>
+  <button class="vanilla-result" id="resultBut">Result</button>
   <button class="vanilla-save">Save</button>
   <button class="vanilla-rotate" data-deg="-90">Rotate Left</button>
   <button class="vanilla-rotate" data-deg="90">Rotate Right</button>
@@ -47,8 +57,8 @@ vanillaRotate = document.querySelector('.vanilla-rotate');
 function demoVanilla() {
 var vanilla = new Croppie(document.getElementById('vanilla-demo'), {
   viewport: {
-    width: 475,
-    height: 475
+    width: 474,
+    height: 474
   },
   boundary: {
     width: 600,
@@ -91,5 +101,9 @@ swal({
 }
 
 demoVanilla();
+
+$( '#resultBut').click(function() {
+  $('#swal2-content').append('<img id="resultFrame" src="img/peacenyc_frame.png" />')
+});
 </script>
 </html>
